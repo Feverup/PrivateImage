@@ -37,8 +37,14 @@ public class UIPrivateImageView: UIView {
             self.layer.videoGravity = newValue
         }
     }
-    
-    public func updateImage(to image: UIImage?) {
+
+    public var image: UIImage? {
+        didSet {
+            updateImage(to: image)
+        }
+    }
+
+    func updateImage(to image: UIImage?) {
         self.layer.flushAndRemoveImage()
         guard let sampleBuffer = image?.cgImage?.sampleBuffer else { return }
         self.layer.enqueue(sampleBuffer)
